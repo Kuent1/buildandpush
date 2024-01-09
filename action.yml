@@ -17,5 +17,5 @@ runs:
       shell: bash
     - name: Login to docker registry
       run: |
-        docker login -u ${{ inputs.username }} -p ${{ inputs.password }}
+        docker login ghcr.io -u ${{ inputs.username }} -p ${{ inputs.password }}
       shell: bash

@@ -27,3 +27,8 @@ runs:
       run: |
         docker build -t ${{ inputs.registry }}/kuent1/buildandpush/${{ inputs.image-name }} .
       shell: bash
+
+    - name: Push image
+      run : |
+        docker push ${{inputs.registry}}/kuent1/buildandpush/${{ inputs.image-name }}
+      shell: bash

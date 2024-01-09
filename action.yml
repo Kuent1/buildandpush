@@ -1,6 +1,8 @@
 ---
 name: 'build-and-push-to-github'
 description: 'Build and push a Docker Image'
+env:
+  DOCKER_REGISTRY: ghcr.io
 inputs:
   image-name: 
     description: 'Image to build and push'
@@ -12,8 +14,6 @@ inputs:
 
 runs:
   using: "composite"
-  env:
-    DOCKER_REGISTRY: ghcr.io
   steps:
     - name: Login to GHCR 
       run: |

@@ -24,7 +24,7 @@ runs:
       shell: bash
 
     - name: Repo name to lowercase
-      uses: profy12/lowercase-action@latest
+      uses: profy12/lowercase-action@0.6
       id: lowered
       with:
         text: |

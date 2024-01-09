@@ -9,9 +9,6 @@ inputs:
     description: 'Username to login to Github registry'
   password:
     description: 'Token to login to Github Registry'
-  branding:
-  icon: chevron-down
-  color: gray-dark
 
 runs:
   using: "composite"

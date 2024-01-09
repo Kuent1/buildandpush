@@ -1,12 +1,15 @@
 ---
 name: 'build-and-push-to-github'
 description: 'Build and push a Docker Image'
-env:
-  DOCKER_REGISTRY: ghcr.io
+
 inputs:
   image-name: 
     description: 'Image to build and push'
     required: true
+  registry:
+    description: 'Which registry to push on'
+    default: ghcr.io
+    required: false
   username:
     description: 'Username to login to Github registry'
   password:
@@ -17,10 +20,10 @@ runs:
   steps:
     - name: Login to GHCR 
       run: |
-        docker login ${{ env.DOCKER_REGISTRY }} -u ${{ inputs.username }} -p ${{ inputs.password }}
+        docker login ${{ inputs.registry }} -u ${{ inputs.username }} -p ${{ inputs.password }}
       shell: bash
 
     - name: Docker build
       run: |
-        docker build -t ${{ env.DOCKER_REGISTRY }}/kuent1/buildandpush/${{ inputs.image-name }} .
+        docker build -t ${{ inputs.registry }}/kuent1/buildandpush/${{ inputs.image-name }} .
       shell: bash

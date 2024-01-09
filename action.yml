@@ -13,9 +13,12 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
-      shell: bash
-    - name: Login to docker registry
+    - name: Login to GHCR 
       run: |
         docker login ghcr.io -u ${{ inputs.username }} -p ${{ inputs.password }}
+      shell: bash
+
+    - name: Docker build
+      run: |
+        docker build -t ${{ github.repository }}/${{ monimage }} .
       shell: bash

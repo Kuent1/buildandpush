@@ -12,13 +12,15 @@ inputs:
 
 runs:
   using: "composite"
+  env:
+    DOCKER_REGISTRY: ghcr.io
   steps:
     - name: Login to GHCR 
       run: |
-        docker login ghcr.io -u ${{ inputs.username }} -p ${{ inputs.password }}
+        docker login ${{ env.DOCKER_REGISTRY }} -u ${{ inputs.username }} -p ${{ inputs.password }}
       shell: bash
 
     - name: Docker build
       run: |
-        docker build -t kuent1/buildandpush/${{ inputs.image-name }} .
+        docker build -t ${{ env.DOCKER_REGISTRY }}/kuent1/buildandpush/${{ inputs.image-name }} .
       shell: bash

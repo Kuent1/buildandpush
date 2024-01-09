@@ -23,12 +23,18 @@ runs:
         docker login ${{ inputs.registry }} -u ${{ inputs.username }} -p ${{ inputs.password }}
       shell: bash
 
+    - name: Repo name to lowercase
+      uses: profy12/lowercase-action@latest
+      id: lowered
+      with:
+        text: |
+          ${{ inputs.registry }}/${{ github.repository }}/${{ inputs.image-name }}
     - name: Docker build
       run: |
-        docker build -t ${{ inputs.registry }}/kuent1/buildandpush/${{ inputs.image-name }} .
+        docker build -t ${{ steps.lowered.output.text }} .
       shell: bash
 
     - name: Push image
       run : |
-        docker push ${{inputs.registry}}/kuent1/buildandpush/${{ inputs.image-name }}
+        docker push ${{ steps.lowered.output.text }}
       shell: bash

@@ -1,0 +1,24 @@
+---
+name: 'build-and-push-to-github'
+description: 'Build and push a Docker Image'
+inputs:
+  image-name: 
+    description: 'Image to build and push'
+    required: true
+  username:
+    description: 'Username to login to Github registry'
+  password:
+    description: 'Token to login to Github Registry'
+  branding:
+  icon: chevron-down
+  color: gray-dark
+
+runs:
+  using: "composite"
+  steps:
+    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
+      shell: bash
+    - name: Login to docker registry
+      run: |
+        docker login -u ${{ inputs.username }} -p ${{ inputs.password }}
+      shell: bash

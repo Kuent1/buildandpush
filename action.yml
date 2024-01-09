@@ -20,5 +20,5 @@ runs:
 
     - name: Docker build
       run: |
-        docker build -t ${{ github.repository }}/${{ monimage }} .
+        docker build -t ${{ github.repository }}/${{ inputs.image-name }} .
       shell: bash
